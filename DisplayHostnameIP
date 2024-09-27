@@ -1,0 +1,35 @@
+# Carrega o assembly do Windows Forms
+Add-Type -AssemblyName System.Windows.Forms
+
+# Função para obter informações da rede
+function Get-NetworkInfo {
+    $hostname = $env:COMPUTERNAME
+    # Obtém as informações de IP usando Get-NetIPConfiguration
+    $netInfo = Get-NetIPConfiguration | Where-Object { $_.IPv4Address -ne $null }
+    $ipv4 = $netInfo.IPv4Address.IPAddress
+    return [PSCustomObject]@{
+        Hostname = $hostname
+        IPv4 = $ipv4
+    }
+}
+
+# Criação do Formulário
+$form = New-Object Windows.Forms.Form
+$form.Text = "Informações de Rede"
+$form.Size = New-Object Drawing.Size(300,200)
+$form.StartPosition = "CenterScreen"
+
+# Criação do label para exibir as informações
+$label = New-Object Windows.Forms.Label
+$label.Size = New-Object Drawing.Size(250,50)
+$label.Location = New-Object Drawing.Point(25, 30)
+
+# Obtém as informações de rede e exibe no label ao iniciar o formulário
+$networkInfo = Get-NetworkInfo
+$label.Text = "Hostname: " + $networkInfo.Hostname + "nIPv4: " + $networkInfo.IPv4
+
+# Adiciona o label ao formulário
+$form.Controls.Add($label)
+
+# Exibe o formulário
+$form.ShowDialog()
