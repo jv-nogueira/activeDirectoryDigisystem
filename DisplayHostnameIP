@@ -36,7 +36,6 @@ $btnCopyHostname.Location = New-Object Drawing.Point(230, 30)
 $btnCopyHostname.Text = "Copiar"
 $btnCopyHostname.Add_Click({
     [System.Windows.Forms.Clipboard]::SetText($networkInfo.Hostname)
-    [System.Windows.Forms.MessageBox]::Show("Hostname copiado para a área de transferência.")
 })
 $form.Controls.Add($btnCopyHostname)
 
@@ -54,7 +53,6 @@ $btnCopyIPv4.Location = New-Object Drawing.Point(230, 70)
 $btnCopyIPv4.Text = "Copiar"
 $btnCopyIPv4.Add_Click({
     [System.Windows.Forms.Clipboard]::SetText($networkInfo.IPv4)
-    [System.Windows.Forms.MessageBox]::Show("IPv4 copiado para a área de transferência.")
 })
 $form.Controls.Add($btnCopyIPv4)
 
