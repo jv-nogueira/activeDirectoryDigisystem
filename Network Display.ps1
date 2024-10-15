@@ -1,4 +1,4 @@
-# Carrega o assembly do Windows Forms
+﻿# Carrega o assembly do Windows Forms
 Add-Type -AssemblyName System.Windows.Forms
 
 # Função para obter informações da rede
